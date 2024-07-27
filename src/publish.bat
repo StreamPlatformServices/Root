@@ -1,12 +1,10 @@
 @echo off
 setlocal
 
-REM Definiowanie zmiennej dla ścieżki relatywnej publikacji
 set PublishDir=..\..\bin
 set DatabaseDir=..\..\data
 set ConfigDir=..\..\config
 
-REM Publikowanie API Gateway
 cd APIGateway
 echo Publishing API Gateway... %PublishDir%\APIGateway
 dotnet publish -c Release -o %PublishDir%\APIGateway
@@ -20,7 +18,6 @@ mkdir %DatabaseDir%\ContentMetadataService
 copy /Y MicroServicesClients\ContentMetadataServiceMock\content.db %DatabaseDir%\ContentMetadataService\content.db
 cd ..
 
-REM Publikowanie Authorization Service
 cd AuthorizationService
 echo Publishing Authorization Service...
 dotnet publish -c Release -o %PublishDir%\AuthorizationService
@@ -34,24 +31,40 @@ mkdir %DatabaseDir%\AuthorizationService
 copy /Y AuthorizationService\users.db %DatabaseDir%\AuthorizationService\users.db
 cd ..
 
-REM Publikowanie Key Service
 cd KeyService
 echo Publishing Key Service...
 dotnet publish -c Release -o %PublishDir%\KeyService
+
+echo moving default appsettings.json to config folder... 
+mkdir %ConfigDir%\KeyService
+copy /Y KeyService\appsettings.json %ConfigDir%\KeyService\appsettings.json
+
+echo moving initial user database to data folder... 
+mkdir %DatabaseDir%\KeyService
+copy /Y KeyService\keys.db %DatabaseDir%\KeyService\keys.db
 cd ..
 
-REM Publikowanie License Service
 cd LicenseService
 echo Publishing License Service... %PublishDir%\LicenseService
 dotnet publish -c Release -o %PublishDir%\LicenseService
+
+echo moving default appsettings.json to config folder... 
+mkdir %ConfigDir%\LicenseService
+copy /Y LicenseService\appsettings.json %ConfigDir%\LicenseService\appsettings.json
+
+echo moving initial user database to data folder... 
+mkdir %DatabaseDir%\LicenseService
+copy /Y LicenseService\license.db %DatabaseDir%\LicenseService\license.db
 cd ..
 
-REM Publikowanie Stream Gateway
 cd StreamGateway
 echo Publishing Stream Gateway...
 dotnet publish -c Release -o %PublishDir%\StreamGateway
+
+echo moving default appsettings.json to config folder... 
+mkdir %ConfigDir%\StreamGateway
+copy /Y StreamGateway\appsettings.json %ConfigDir%\StreamGateway\appsettings.json
 cd ..
 
 echo All services have been published to %PublishDir%
 endlocal
-rem pause
