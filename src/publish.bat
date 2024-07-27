@@ -17,7 +17,7 @@ copy /Y APIGatewayMain\appsettings.json %ConfigDir%\APIGateway\appsettings.json
 
 echo moving initial content database to data folder... 
 mkdir %DatabaseDir%\ContentMetadataService
-copy /Y ContentMetadataServiceMock\content.db %DatabaseDir%\ContentMetadataService\content.db
+copy /Y MicroServicesClients\ContentMetadataServiceMock\content.db %DatabaseDir%\ContentMetadataService\content.db
 cd ..
 
 REM Publikowanie Authorization Service
