@@ -1,24 +1,24 @@
-cd APIGateway
+cd Repository/APIGateway
 git fetch
 git reset --hard origin/master
-cd ..
+cd ../..
 
-cd StreamGateway
+cd Repository/StreamGateway
 git fetch
 git reset --hard origin/master
-cd ..
+cd ../..
 
-cd LicenseService
+cd Repository/LicenseService
 git fetch
 git reset --hard origin/master
-cd ..
+cd ../..
 
-cd KeyService
+cd Repository/KeyService
 git fetch
 git reset --hard origin/master
-cd ..
+cd ../..
 
-cd AuthorizationService
+cd Repository/AuthorizationService
 git fetch
 git reset --hard origin/auth
-cd ..
+cd ../..

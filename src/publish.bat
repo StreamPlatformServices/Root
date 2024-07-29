@@ -1,11 +1,11 @@
 @echo off
 setlocal
 
-set PublishDir=..\..\bin
-set DatabaseDir=..\..\data
-set ConfigDir=..\..\config
+set PublishDir=..\..\..\bin
+set DatabaseDir=..\..\..\data
+set ConfigDir=..\..\..\config
 
-cd APIGateway
+cd Repository/APIGateway
 echo Publishing API Gateway... %PublishDir%\APIGateway
 dotnet publish -c Release -o %PublishDir%\APIGateway
 
@@ -16,9 +16,9 @@ copy /Y APIGatewayMain\appsettings.json %ConfigDir%\APIGateway\appsettings.json
 echo moving initial content database to data folder... 
 mkdir %DatabaseDir%\ContentMetadataService
 copy /Y MicroServicesClients\ContentMetadataServiceMock\content.db %DatabaseDir%\ContentMetadataService\content.db
-cd ..
+cd ../..
 
-cd AuthorizationService
+cd Repository/AuthorizationService
 echo Publishing Authorization Service...
 dotnet publish -c Release -o %PublishDir%\AuthorizationService
 
@@ -29,9 +29,9 @@ copy /Y AuthorizationService\appsettings.json %ConfigDir%\AuthorizationService\a
 echo moving initial user database to data folder... 
 mkdir %DatabaseDir%\AuthorizationService
 copy /Y AuthorizationService\users.db %DatabaseDir%\AuthorizationService\users.db
-cd ..
+cd ../..
 
-cd KeyService
+cd Repository/KeyService
 echo Publishing Key Service...
 dotnet publish -c Release -o %PublishDir%\KeyService
 
@@ -42,9 +42,9 @@ copy /Y KeyService\appsettings.json %ConfigDir%\KeyService\appsettings.json
 echo moving initial user database to data folder... 
 mkdir %DatabaseDir%\KeyService
 copy /Y KeyService\keys.db %DatabaseDir%\KeyService\keys.db
-cd ..
+cd ../..
 
-cd LicenseService
+cd Repository/LicenseService
 echo Publishing License Service... %PublishDir%\LicenseService
 dotnet publish -c Release -o %PublishDir%\LicenseService
 
@@ -55,16 +55,16 @@ copy /Y LicenseService\appsettings.json %ConfigDir%\LicenseService\appsettings.j
 echo moving initial user database to data folder... 
 mkdir %DatabaseDir%\LicenseService
 copy /Y LicenseService\license.db %DatabaseDir%\LicenseService\license.db
-cd ..
+cd ../..
 
-cd StreamGateway
+cd Repository/StreamGateway
 echo Publishing Stream Gateway...
 dotnet publish -c Release -o %PublishDir%\StreamGateway
 
 echo moving default appsettings.json to config folder... 
 mkdir %ConfigDir%\StreamGateway
 copy /Y StreamGateway\appsettings.json %ConfigDir%\StreamGateway\appsettings.json
-cd ..
+cd ../..
 
 echo All services have been published to %PublishDir%
 endlocal
